@@ -13,6 +13,7 @@ public class Stack_Algos {
         s.push(top);
     }
 
+    // reverse the element in stack
     public static void reverseStack(Stack<Integer> s) {
         if (s.isEmpty()) {
             return;
@@ -30,6 +31,34 @@ public class Stack_Algos {
         }
     }
 
+    // valid parantheses problem
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            } else {
+                if (ch == ')') {
+                    if (stack.isEmpty() || stack.pop() != '(') {
+                        return false;
+                    }
+                }
+                if (ch == '}') {
+                    if (stack.isEmpty() || stack.pop() != '{') {
+                        return false;
+                    }
+                }
+                if (ch == ']') {
+                    if (stack.isEmpty() || stack.pop() != '[') {
+                        return false;
+                    }
+                }
+            }
+        }
+        return stack.isEmpty();        
+    }
+
     public static void main(String[] args) {
         Stack<Integer> s = new Stack<>();
         s.push(1);
@@ -39,6 +68,6 @@ public class Stack_Algos {
         reverseStack(s);
         // pushAtBottom(0, s);
         printStack(s);
-           
+        System.out.println(isValid("({})("));   
     }
 }
