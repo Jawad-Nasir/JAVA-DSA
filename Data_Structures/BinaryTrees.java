@@ -21,7 +21,6 @@ class BinaryTree {
         if (nodes[idx] == -1) {
             return null;
         }
-
         Node newNode = new Node(nodes[idx]);
         newNode.left = buildtree(nodes);
         newNode.right = buildtree(nodes);
@@ -123,6 +122,20 @@ class BinaryTree {
 
         return maxHeight;
     } 
+
+    // invert binarytree 
+    public Node invertTree(Node root) {
+        if (root == null) {
+            return null;
+        }
+        Node left = invertTree(root.left);
+        Node right = invertTree(root.right);
+
+        root.left = right;
+        root.right = left;
+
+        return root;
+    }
 }
 
 public class BinaryTrees {
@@ -131,6 +144,11 @@ public class BinaryTrees {
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildtree(nodes);
         System.out.println(root.data);
+        
+        tree.preorder(root);
+        tree.invertTree(root);
+        System.out.println();
+        
         tree.preorder(root);
         tree.inorder(root); 
         tree.postorder(root);
