@@ -7,8 +7,6 @@ class Node {
 
     Node(int data) {
         this.data = data;
-        this.left = null;
-        this.right = null;        
     }
 }
 
@@ -85,8 +83,32 @@ class BinaryTree {
                     q.add(currNode.right);
                 }
             }
+        }        
+    }
+
+    // find average of nodes at each level 
+    public List<Integer> averageLevel(Node root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+
+        while (!q.isEmpty()) {
+            int avg = 0;
+            int levelSize = q.size();
+            for (int i = 0; i < levelSize; i++) {
+                Node currNode = q.remove();
+                avg += currNode.data;
+                if (currNode.left != null) {
+                    q.add(currNode.left);
+                }
+                if (currNode.right != null) {
+                    q.add(currNode.right);
+                }
+            }
+            avg /= levelSize;
+            result.add(avg);
         }
-        
+        return result;
     }
 
     // count no. of nodes
@@ -109,6 +131,20 @@ class BinaryTree {
         int rightSum = sumOfNodes(root.right);
 
         return leftSum + rightSum + root.data; 
+    }    
+    
+    // invert binarytree 
+    public Node invertTree(Node root) {
+        if (root == null) {
+            return null;
+        }
+        Node left = invertTree(root.left);
+        Node right = invertTree(root.right);
+        
+        root.left = right;
+        root.right = left;
+        
+        return root;
     }
     
     // finding height of binarytree
@@ -118,23 +154,19 @@ class BinaryTree {
         }
         int leftHeight = height(root.left);
         int rightHeight = height(root.right);
-        int maxHeight = Math.max(leftHeight, rightHeight) + 1;
 
-        return maxHeight;
+        int dia = leftHeight + rightHeight + 1;
+        diameter = Math.max(diameter, dia);
+        
+        return Math.max(leftHeight, rightHeight) + 1;
     } 
-
-    // invert binarytree 
-    public Node invertTree(Node root) {
-        if (root == null) {
-            return null;
-        }
-        Node left = invertTree(root.left);
-        Node right = invertTree(root.right);
-
-        root.left = right;
-        root.right = left;
-
-        return root;
+    
+    // diameter of binarytree
+    int diameter = 0;
+    public int findDiameter(Node root) {
+        // using height method to determine highest length b/w two nodes 
+        height(root);
+        return diameter;
     }
 }
 
@@ -145,16 +177,26 @@ public class BinaryTrees {
         Node root = tree.buildtree(nodes);
         System.out.println(root.data);
         
+        // inverting a tree
         tree.preorder(root);
         tree.invertTree(root);
         System.out.println();
         
+        // traversals
         tree.preorder(root);
         tree.inorder(root); 
         tree.postorder(root);
         tree.levelOrder(root);
+
         System.out.println(tree.countOfNodes(root));        
         System.out.println(tree.sumOfNodes(root));
         System.out.println(tree.height(root));
+        System.out.println(tree.findDiameter(root));
+
+        // calculating average of nodes at each level
+        List<Integer> l = tree.averageLevel(root);
+        for (Integer i : l) {
+            System.out.print(i + " ");
+        }
     }
 }
