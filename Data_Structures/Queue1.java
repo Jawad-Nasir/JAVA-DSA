@@ -54,8 +54,7 @@ class  queue {
             System.out.println(peek());
             remove();
         }
-    }
-    
+    }    
 }
 
 public class Queue1 {    
