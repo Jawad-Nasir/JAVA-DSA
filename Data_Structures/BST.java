@@ -123,9 +123,9 @@ public class BST {
 
         displayBSTInorder(root);
         System.out.println(); 
-        // System.out.println(search(2, root));
-        // delete(12, root);
-        // displayBSTInorder(root);
+        System.out.println(search(2, root));
+        delete(12, root);
+        displayBSTInorder(root);
         printInRange(root, 6, 11);
     }
 }
