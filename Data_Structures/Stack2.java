@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 
+
 class stack2 {
     ArrayList<Integer> list = new ArrayList<>();
 
