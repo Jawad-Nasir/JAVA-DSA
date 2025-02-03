@@ -11,10 +11,12 @@ class queue {
         this.size = n;
     }
 
+    // function for checking queue is empty 
     public boolean isEmpty() {
         return rear == -1 && front == -1;
     }
 
+    // function for checking queue is full
     public boolean isFull() {
         return (rear+1) % size == front;
     }
