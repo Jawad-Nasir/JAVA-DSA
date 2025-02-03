@@ -1,10 +1,11 @@
+// implementing linkedlist
+
 class Node {
     String data;
     Node next;
     
     Node(String data){
         this.data = data;
-        this.next = null;
     }
 }
 
@@ -96,19 +97,18 @@ class LL {
 
         secondlast.next = null;
     }
+    
     //get size of a list
     public int getSize(){
         return size;
-    }
-
-    
+    }    
 }
   
 public class linkedlist {
     public static void main(String[] args) {
         LL list = new LL();
-        // list.addFirst("1");
-        // list.addLast("2");
+        list.addFirst("1");
+        list.addLast("2");
         list.addLast("2");
         list.addLast("1");
         list.printlist();
